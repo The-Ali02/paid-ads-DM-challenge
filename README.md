@@ -6,7 +6,7 @@ Try running the following commands:
 - dbt run
 - dbt test
 
-## README: Social Ads Data Model
+Paid Ads Data Modelling
 
 This document outlines our data model for social advertising data, a design built for robust reporting and long-term scalability.
 
