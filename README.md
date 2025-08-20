@@ -51,6 +51,7 @@ Having worked with ad data before, I could figure out how we can get `engagement
 
 ### Real World Scenarios:
 - Setting the facts and dimension tables in incremental mode since, we want to upsert our data, rather than overwriting it.
+- Introducing the surrogate key via `dbt_utils.generate_surrogate_key()` on fact and dimension tables.
 - Using _is_incremental()_ macro effectively where the condition is like as follows:
    ```jinja
   {% if is_incremental() %}
