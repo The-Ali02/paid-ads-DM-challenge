@@ -25,10 +25,14 @@ For the Generated Dashboard report from `paid_ads_basic_performance` reporting t
 * **Dimension Tables**: Surrounding tables like `dim_campaigns`, `dim_ads`, `dim_adsets` and `dim_creatives` contain all descriptive attributes. This separation of facts and dimensions ensures **data integrity** and significantly **reduces redundancy**, as descriptive data is not duplicated across millions of fact rows.
 
 The core dimension tables have details unioned from all ad platforms/channels at each granularity (ad,adgroup,campaign)
+
   `Dim_Campaigns:` This dimension table has campaign description and it's associated details like campaign `Objective`, and `Buying Type`.
   We could also have `campaign_name`, effective_start_date, effective_ending_date for duration which campaign runs in here.
+  
   `Dim_Adset:` This dimension table has adgroup/adset level details and campaign it is part of, we can also have adset_name and target details as well.
+  
   `Dim_Ads:` This dimension table has ad evel details, like ad_id, it's associated adset, campaign, ad_text, ad_title.
+  
   `Dim_creatives:` This dimension table has creative(any specific visuals/text) that we define to run our advertisement, it's associated ad_id,
   for this data seeing it's nature, I had included the attributes of adset, campaign as well as different campaign or channel might have identical adset, ad id's.
 
