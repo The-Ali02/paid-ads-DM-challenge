@@ -1,12 +1,7 @@
-Welcome to my dbt project!
+### Welcome to my dbt project!
 
-### Using the starter project
 
-Try running the following commands:
-- dbt run
-- dbt test
-
-Paid Ads Data Modelling
+### Paid Ads Data Modelling
 
 This document outlines our data model for social advertising data, a design built for robust reporting and long-term scalability.
 
