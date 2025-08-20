@@ -18,7 +18,8 @@ _If needed I can provide credentials to snowflake, sigma for evaluators to verif
 
 
 - **[Precise Metrics View](https://github.com/The-Ali02/paid-ads-DM-challenge/blob/main/Reporting%20Table.pdf)**
-<img width="1145" height="633" alt="image" src="https://github.com/user-attachments/assets/9df60a9d-d7d5-46f2-80ad-086e1e19b280" />
+<img width="1652" height="378" alt="image" src="https://github.com/user-attachments/assets/66b438e0-05ba-45d4-811e-97b63b486aae" />
+
 
 
 For the Generated Dashboard report from `paid_ads_basic_performance` reporting table: [Sigma Reporting Dashboard](https://app.sigmacomputing.com/paid-ads/workbook/workbook-6hVGQ80niUkyAKdVDGcOVE?:link_source=share)
