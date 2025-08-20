@@ -10,6 +10,19 @@ Try running the following commands:
 
 This document outlines our data model for social advertising data, a design built for robust reporting and long-term scalability.
 
+**Note: ** _Due to issue with my debit card not having international transfers enable causing failure for Google BigQuery signup and I couldn't resolve this on weekends, I have used Snowflake as my data storage connection and sigma computing for charts generation._
+_If needed I can provide credentials to snowflake, sigma for evaluators to verify the authenticity of my task completion._
+
+- **[Dashboard Report](https://github.com/The-Ali02/paid-ads-DM-challenge/blob/main/Improvado%20MCDM%20challenge%20dashboard.pdf)**
+<img width="1082" height="800" alt="image" src="https://github.com/user-attachments/assets/a466a187-eccc-4224-8ef0-c17ebe6cf3cc" />
+
+
+- **[Precise Metrics View](https://github.com/The-Ali02/paid-ads-DM-challenge/blob/main/Reporting%20Table.pdf)**
+<img width="1145" height="633" alt="image" src="https://github.com/user-attachments/assets/9df60a9d-d7d5-46f2-80ad-086e1e19b280" />
+
+
+For the Generated Dashboard report from `paid_ads_basic_performance` reporting table: [Sigma Reporting Dashboard](https://app.sigmacomputing.com/paid-ads/workbook/workbook-6hVGQ80niUkyAKdVDGcOVE?:link_source=share)
+
 ### 1. Core Data Architecture: The Star Schema
 
 * **Fact Table**: A single `fact_social_ads_performance` table serves as our central source of truth. It stores all quantitative metrics (e.g., clicks, spend, impressions) from every ad platform. This approach simplifies reporting by providing all core performance data in one place, eliminating the need for complex multi-table queries at BI layer. 
