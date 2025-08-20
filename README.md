@@ -10,7 +10,7 @@ Paid Ads Data Modelling
 
 This document outlines our data model for social advertising data, a design built for robust reporting and long-term scalability.
 
-**Note: ** _Due to issue with my debit card not having international transfers enable causing failure for Google BigQuery signup and I couldn't resolve this on weekends, I have used Snowflake as my data storage connection and sigma computing for charts generation._
+**Note:** _Due to issue with my debit card not having international transfers enable causing failure for Google BigQuery signup and I couldn't resolve this on weekends, I have used Snowflake as my data storage connection and sigma computing for charts generation._
 _If needed I can provide credentials to snowflake, sigma for evaluators to verify the authenticity of my task completion._
 
 - **[Dashboard Report](https://github.com/The-Ali02/paid-ads-DM-challenge/blob/main/Improvado%20MCDM%20challenge%20dashboard.pdf)**
