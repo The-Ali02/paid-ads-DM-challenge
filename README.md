@@ -22,7 +22,7 @@ Our unified fact table design is a key strength, built to scale as our data sour
 - I handled platform-specific metrics (like Twitter's `retweets`) by mapping them with appropriate metric from other platform (like `shares` on facebook) directly in the unified fact table.
 -So if we want to see retweets performance at campaign_level on twitter we can just get it by filtering the fact table for `channel='Twitter'` and alias `shares` to `retweets`. 
 - For metrics like `SKAN_APP_INSTALL` which are specific to iOS targetted devices are included directly as column.  This "fat" table approach is highly efficient in modern data warehouses, as they are optimized for sparse data, and it allows for new platforms to be integrated seamlessly without requiring a redesign of the entire model.
-- 
+
 * **Low-Grain Analysis**: Our design provides the flexibility to create reports at any level of detail not just channel, but campaign_level, ad_set level, ad level or even creative level(facebook) from each platform.
 
 Having worked with ad data before, I could figure out how we can get `engagement` metric for facebook data:
