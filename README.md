@@ -42,6 +42,7 @@ Our unified fact table design is a key strength, built to scale as our data sour
 Having worked with ad data before, I could figure out how we can get `engagement` metric for facebook data:
 `        (likes + views + clicks + shares + comments) as ENGAGEMENTS` any action that user has made with our advertisement is classified as an engaging action. Eg: Viewing a ad video for > 3sec counts as view, likes, shares, clicks, comments are by themselves an action from the user side with the advertisement. 
 
+### Conclusion: 
 The MCDM structure provided is indeed helpful in creating the targetted dashboard for reporting of **Ads Performance** but columns like `placement_id` metrics like `post_view/click_conversion` which are not properly defined in our raw data shouldn't be included in reporting table.
 
- 
+ Also the current structure is helpful if we want to get data at any granularity other than just channel.
