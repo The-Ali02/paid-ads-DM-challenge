@@ -12,16 +12,22 @@ This document outlines our data model for social advertising data, a design buil
 
 ### 1. Core Data Architecture: The Star Schema
 
-Our data is structured as a **star schema**, a highly efficient and widely-used model for business intelligence. This design consists of a central, unified **fact table** surrounded by multiple **dimension tables**.
+* **Fact Table**: A single `fact_social_ads_performance` table serves as our central source of truth. It stores all quantitative metrics (e.g., clicks, spend, impressions) from every ad platform. This approach simplifies reporting by providing all core performance data in one place, eliminating the need for complex multi-table queries at BI layer. 
+* **Dimension Tables**: Surrounding tables like `dim_campaigns`, `dim_ads`, `dim_adsets` and `dim_creatives` contain all descriptive attributes. This separation of facts and dimensions ensures **data integrity** and significantly **reduces redundancy**, as descriptive data is not duplicated across millions of fact rows.
 
-* **Fact Table**: A single `fact_social_ads_performance` table serves as our central source of truth. It stores all quantitative metrics (e.g., clicks, spend, impressions) from every ad platform. This approach simplifies reporting by providing all core performance data in one place, eliminating the need for complex multi-table queries. 
-* **Dimension Tables**: Surrounding tables like `dim_campaigns`, `dim_adsets`, and `dim_creatives` contain all descriptive attributes. This separation of facts and dimensions ensures **data integrity** and significantly **reduces redundancy**, as descriptive data is not duplicated across millions of fact rows.
-
-### 2. Scalability and Handling Diverse Data
+### 2. Handling Diverse Data from all ad platforms and mapping metrics
 
 Our unified fact table design is a key strength, built to scale as our data sources grow.
 
-* **Future-Proofing**: We handle platform-specific metrics (like Twitter's `retweets`) by including their columns directly in the unified fact table. This "fat" table approach is highly efficient in modern data warehouses, as they are optimized for sparse data, and it allows for new platforms to be integrated seamlessly without requiring a redesign of the entire model. The structure effortlessly accommodates new channels and their unique metrics, ensuring our data model remains robust as we scale.
-* **Flexible Reporting**: Our design provides the flexibility to create reports at any level of detail.
-    * **Low-Grain Analysis**: Analysts can directly query the core `fact_social_ads_performance` table for detailed, atomic-level insights.
-    * **High-Grain Reporting**: We build pre-aggregated **reporting tables** on top of the star schema. These materialized views (e.g., `rpt_daily_campaign_performance`) summarize data at a higher level, significantly improving the performance of our dashboards and common reports by eliminating on-the-fly calculations.
+- I handled platform-specific metrics (like Twitter's `retweets`) by mapping them with appropriate metric from other platform (like `shares` on facebook) directly in the unified fact table.
+-So if we want to see retweets performance at campaign_level on twitter we can just get it by filtering the fact table for `channel='Twitter'` and alias `shares` to `retweets`. 
+- For metrics like `SKAN_APP_INSTALL` which are specific to iOS targetted devices are included directly as column.  This "fat" table approach is highly efficient in modern data warehouses, as they are optimized for sparse data, and it allows for new platforms to be integrated seamlessly without requiring a redesign of the entire model.
+- 
+* **Low-Grain Analysis**: Our design provides the flexibility to create reports at any level of detail not just channel, but campaign_level, ad_set level, ad level or even creative level(facebook) from each platform.
+
+Having worked with ad data before, I could figure out how we can get `engagement` metric for facebook data:
+`        (likes + views + clicks + shares + comments) as ENGAGEMENTS` any action that user has made with our advertisement is classified as an engaging action. Eg: Viewing a ad video for > 3sec counts as view, likes, shares, clicks, comments are by themselves an action from the user side with the advertisement. 
+
+The MCDM structure provided is indeed helpful in creating the targetted dashboard for reporting of **Ads Performance** but columns like `placement_id` metrics like `post_view/click_conversion` which are not properly defined in our raw data shouldn't be included in reporting table.
+
+ 
