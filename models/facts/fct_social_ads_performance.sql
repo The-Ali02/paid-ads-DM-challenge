@@ -28,7 +28,6 @@ with bing_metrics as (
         null as registrations,
         null as ENGAGEMENTS,
         null as VIDEO_VIEWS,
-        null as retweets,
         null as SKAN_APP_INSTALL,
         null as SKAN_CONVERSION
 
@@ -60,7 +59,6 @@ with bing_metrics as (
         registrations,
         (likes+views+clicks+shares+comments) as ENGAGEMENTS,
         null as VIDEO_VIEWS,
-        null as retweets,
         null as SKAN_APP_INSTALL,
         null as SKAN_CONVERSION
 
@@ -92,7 +90,6 @@ tiktok_metrics as (
         registrations,
         null as ENGAGEMENTS,
         VIDEO_VIEWS,
-        null as retweets,
         SKAN_APP_INSTALL,
         SKAN_CONVERSION
 
@@ -117,14 +114,13 @@ twitter_metrics as (
         comments,
         LIKES,
         link_clicks,
-        null as shares,
+        retweets as shares, --mapping retweet action with shares on facebook, since they both are similar
         null as views,
         null as ADD_TO_CART, 
         null as installs,
         null as registrations,
         ENGAGEMENTS,
         VIDEO_VIEWS,
-        retweets,
         null as SKAN_APP_INSTALL,
         null as SKAN_CONVERSION
 
