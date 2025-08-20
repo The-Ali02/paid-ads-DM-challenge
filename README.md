@@ -8,6 +8,8 @@ This document outlines our data model for social advertising data, a design buil
 **Note:** _Due to issue with my debit card not having international transfers enable causing failure for Google BigQuery signup and I couldn't resolve this on weekends, I have used Snowflake as my data storage connection and sigma computing for charts generation._
 _If needed I can provide credentials to snowflake, sigma for evaluators to verify the authenticity of my task completion._
 
+For the Generated Dashboard report from `paid_ads_basic_performance` reporting table: [Sigma Reporting Dashboard](https://app.sigmacomputing.com/paid-ads/workbook/workbook-6hVGQ80niUkyAKdVDGcOVE?:link_source=share)
+
 - **[Dashboard Report](https://github.com/The-Ali02/paid-ads-DM-challenge/blob/main/Improvado%20MCDM%20challenge%20dashboard.pdf)**
 <img width="1082" height="800" alt="image" src="https://github.com/user-attachments/assets/a466a187-eccc-4224-8ef0-c17ebe6cf3cc" />
 
@@ -15,9 +17,6 @@ _If needed I can provide credentials to snowflake, sigma for evaluators to verif
 - **[Precise Metrics View](https://github.com/The-Ali02/paid-ads-DM-challenge/blob/main/Reporting%20Table.pdf)**
 <img width="1652" height="378" alt="image" src="https://github.com/user-attachments/assets/66b438e0-05ba-45d4-811e-97b63b486aae" />
 
-
-
-For the Generated Dashboard report from `paid_ads_basic_performance` reporting table: [Sigma Reporting Dashboard](https://app.sigmacomputing.com/paid-ads/workbook/workbook-6hVGQ80niUkyAKdVDGcOVE?:link_source=share)
 
 ### 1. Core Data Architecture: The Star Schema
 
@@ -50,7 +49,16 @@ Our unified fact table design is a key strength, built to scale as our data sour
 Having worked with ad data before, I could figure out how we can get `engagement` metric for facebook data:
 `        (likes + views + clicks + shares + comments) as ENGAGEMENTS` any action that user has made with our advertisement is classified as an engaging action. Eg: Viewing a ad video for > 3sec counts as view, likes, shares, clicks, comments are by themselves an action from the user side with the advertisement. 
 
+### Real World Scenarios:
+- Setting the facts and dimension tables in incremental mode since, we want to upsert our data, rather than overwriting it.
+- Using _is_incremental()_ macro effectively where the condition is like as follows:
+   ```jinja
+  {% if is_incremental() %}
+  WHERE
+      __insert_date > (SELECT MAX(__insert_date) FROM {{ this }})
+  {% endif %}
+   ```
 ### Conclusion: 
 The MCDM structure provided is indeed helpful in creating the targetted dashboard for reporting of **Ads Performance** but columns like `placement_id` metrics like `post_view/click_conversion` which are not properly defined in our raw data shouldn't be included in reporting table.
 
- Also the current structure is helpful if we want to get data at any granularity other than just channel.
+Also my current fact table is helpful if we want to get data at any granularity other than just channel.
